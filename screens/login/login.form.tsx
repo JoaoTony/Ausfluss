@@ -10,7 +10,7 @@ import {
 const LoginForm: FC = () => (
   <Form>
     <Input placeholder="Digite o email"/>
-    <Input placeholder="Digete a palavra-passe"/>
+    <Input placeholder="Digete a palavra-passe" secureTextEntry={true} />
 
     <Button>
       <ButtonText>Entrar</ButtonText>

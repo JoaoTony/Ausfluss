@@ -14,7 +14,8 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   font-size: 26px;
-  font-weight: bold;
+  font-family: Poppins_900Black;
+  font-weight: 900;
   color: #000;
 `;
 
@@ -23,6 +24,8 @@ export const Description = styled.Text`
   font-weight: normal;
   color: #6A6A6A; 
   margin-bottom: 20px;
+
+  font-family: Poppins_400Regular;
 `;
 
 export const Form = styled.View`
@@ -41,6 +44,8 @@ export const Input = styled.TextInput`
   border: 1px solid #F1F1F1;
 
   padding: 0 10px;
+
+  font-family: Poppins_400Regular;
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -60,6 +65,6 @@ export const Button = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
   font-size: 20px;
-  font-weight: bold;
+  font-family: Poppins_700Bold;
   color: #fff;
 `;
