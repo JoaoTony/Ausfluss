@@ -1,21 +1,31 @@
-import { FC } from 'react';
+import { FC } from 'react'
+import { useNavigation, NavigationProp } from '@react-navigation/native'
+import { RootStackParam } from '../root-stack.type'
+import { Dimensions } from 'react-native'
 
-import { 
-  Form, 
-  Input, 
-  Button, 
-  ButtonText, 
-} from './login.styles';
+import {
+  Form,
+  Button,
+  Input
+} from './login.styles'
 
-const LoginForm: FC = () => (
-  <Form>
-    <Input placeholder="Digite o email"/>
-    <Input placeholder="Digete a palavra-passe" secureTextEntry={true} />
+type NavitaionStak = NavigationProp<RootStackParam, 'Login'>
 
-    <Button>
-      <ButtonText>Entrar</ButtonText>
-    </Button>
-  </Form>
-);
+const LoginForm: FC = () => {
+  const width = Dimensions.get('screen').width
+  const navigation: NavitaionStak = useNavigation()
+  return (
+    <Form>
+      <Input placeholder="Digite o email" width={(width - 32).toString()}/>
+      <Input placeholder="Digete a palavra-passe" width={(width - 32).toString()} secureTextEntry={true} />
 
-export default LoginForm;
+      <Button
+        width={(width - 32).toString()}
+        onPress={() => navigation.navigate('Home')}
+        text="Entrar"
+      />
+    </Form>
+  )
+}
+
+export default LoginForm
