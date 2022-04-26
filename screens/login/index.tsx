@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { FC } from 'react'
 import LoginForm from './login.form'
+import { useNavigation, NavigationProp } from '@react-navigation/native'
 import Illustration from '../../assets/illustration.jpg'
 
 import {
@@ -13,8 +14,13 @@ import {
   CreateAccoutButton,
   CreateAccoutButtonText
 } from './login.styles'
+import { RootStackParam } from '../root-stack.type'
 
-const Login: FC = () => (
+type NavitaionStak = NavigationProp<RootStackParam, 'Login'>
+
+const Login: FC = () => {
+  const navigation: NavitaionStak = useNavigation()
+  return (
   <Container>
     <Ilustration source={Illustration} />
     <Title>Bem-vindo de volta 🤗</Title>
@@ -24,11 +30,12 @@ const Login: FC = () => (
 
     <Row>
       <CreateAccoutText>Não Possui uma conta?</CreateAccoutText>
-      <CreateAccoutButton>
+      <CreateAccoutButton onPress={() => navigation.navigate('SignUp')}>
         <CreateAccoutButtonText>Criar agora</CreateAccoutButtonText>
       </CreateAccoutButton>
     </Row>
   </Container>
-)
+  )
+}
 
 export default Login

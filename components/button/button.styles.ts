@@ -12,6 +12,6 @@ export const Button = styled.TouchableOpacity<{ width: string}>`
 
 export const Text = styled.Text`
   color: #fff;
-  font-size: 20px;
+  font-size: 18px;
   font-family: Poppins_700Bold;
 `
