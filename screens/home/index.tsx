@@ -1,67 +1,70 @@
-import React, { FC } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { Alert } from 'react-native'
+import React from 'react'
 
-import {
-  Container,
-  Title,
-  CustomHeader,
-  ButtonShareLocation,
-  Row,
-  StopButton,
-  PauseButton,
-  ButtonText
-} from './home.styles'
+import SendBox from './send-box'
 
-const Home: FC = () => {
-  const navigation = useNavigation()
-  const hasUnsavedChanges = false
-  React.useEffect(
-    () =>
-      navigation.addListener('beforeRemove', (e) => {
-        if (hasUnsavedChanges) {
-          // If we don't have unsaved changes, then we don't need to do anything
-          return
-        }
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-        // Prevent default behavior of leaving the screen
-        e.preventDefault()
+import { FloatTabBarIcon, FloatTabBarIconWrapper, TabBarIconWrapperIcon } from './home.styles'
 
-        // Prompt the user before leaving the screen
-        Alert.alert(
-          'Tem certeza de que quer voltar?',
-          'You have unsaved changes. Are you sure to discard them and leave the screen?',
-          [
-            { text: "Don't leave", style: 'cancel', onPress: () => {} },
-            {
-              text: 'Discard',
-              style: 'destructive',
-              // If the user confirmed, then we dispatch the action we blocked earlier
-              // This will continue the action that had triggered the removal of the screen
-              onPress: () => navigation.dispatch(e.data.action)
-            }
-          ]
-        )
-      }),
-    [navigation, hasUnsavedChanges]
-  )
+const Tab = createBottomTabNavigator() as any
 
+function MyTabs () {
   return (
-    <Container>
-      <CustomHeader></CustomHeader>
-      <Title>Toque no Botão para começar a partilhar a localização</Title>
-      <ButtonShareLocation></ButtonShareLocation>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
 
-      <Row>
-        <StopButton>
-          <ButtonText>Terminar Partilha</ButtonText>
-        </StopButton>
-        <PauseButton>
-          <ButtonText>Pausar Partilha</ButtonText>
-        </PauseButton>
-      </Row>
-    </Container>
+        tabBarStyle: {
+          position: 'absolute',
+          backgroundColor: '#0C2239',
+          left: 10,
+          right: 10,
+          bottom: 10,
+          borderRadius: 50,
+          height: 60
+        }
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={SendBox}
+        options={{
+          tabBarIcon: ({ focused } : any) => (
+            <TabBarIconWrapperIcon
+              source={require('../../assets/chat.png')}
+              style={{ tintColor: focused ? '#4AD196' : '#fff' }}
+            />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Share"
+        component={SendBox}
+        options={{
+          tabBarIcon: ({ focused } : any) => (
+            <FloatTabBarIconWrapper>
+              <FloatTabBarIcon
+              source={require('../../assets/location.png')}
+            />
+            </FloatTabBarIconWrapper>
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SendBox}
+        options={{
+          tabBarIcon: ({ focused } : any) => (
+            <TabBarIconWrapperIcon
+              source={require('../../assets/settings.png')}
+              style={{ tintColor: focused ? '#4AD196' : '#fff' }}
+            />
+          )
+        }}
+      />
+    </Tab.Navigator>
   )
 }
 
-export default Home
+export default MyTabs

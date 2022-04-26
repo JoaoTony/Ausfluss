@@ -1,7 +1,4 @@
 import styled from 'styled-components/native'
-import { Dimensions } from 'react-native'
-
-const { width } = Dimensions.get('screen')
 
 export const Container = styled.View`
   flex: 1;
@@ -17,68 +14,31 @@ export const Container = styled.View`
   justify-content: center;
 `
 
-export const CustomHeader = styled.View`
-  width: ${width}px;
-  height: 100px;
-  background: #7FB6FD;
-
-  position: absolute;
-  top: 0;
+export const TabBarIconWrapper = styled.View`
+ width: 30px;
+ height: 30px;
+ background-color: red;
+`
+export const TabBarIconWrapperIcon = styled.Image`
+  width: 20px;
+  height: 20px;
 `
 
-export const Title = styled.Text`
-  font-size: 20px;
-  font-family: Poppins_700Bold;
-  color: #000;
+export const FloatTabBarIconWrapper = styled.View`
+ width: 60px;
+ height: 60px;
+ background-color: #4AD196;
 
-  text-align: center;
+ border-radius: 30px;
 
-  margin-bottom: 20px;
+ position: absolute;
+ top: -30px;
+
+ align-items: center;
+ justify-content: center;
 `
 
-export const ButtonShareLocation = styled.TouchableOpacity`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
-
-  background: #000;
-`
-export const Row = styled.View`
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-
-  margin-top: 20px;
-`
-
-export const StopButton = styled.TouchableOpacity`
-  width: 150px;
-  height: 45px;
-  border-radius: 8px;
-
-  background: #F77997;
-  margin: 0 10px;
-
-  align-items: center;
-  justify-content: center;
-`
-
-export const ButtonText = styled.Text`
-  font-size: 14px;
-  font-family: Poppins_400Regular;
-  color: #fff;
-
-  text-align: center;
-`
-
-export const PauseButton = styled.TouchableOpacity`
-  width: 150px;
-  height: 45px;
-  border-radius: 8px;
-
-  background: #7979F7;
-  margin: 0 10px;
-
-  align-items: center;
-  justify-content: center;
+export const FloatTabBarIcon = styled.Image`
+  width: 26px;
+  height: 26px;
 `
