@@ -27,7 +27,7 @@ function MyTabs () {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="SendBox"
         component={SendBox}
         options={{
           tabBarIcon: ({ focused } : any) => (
