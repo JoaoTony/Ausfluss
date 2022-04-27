@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { FloatTabBarIcon, FloatTabBarIconWrapper, TabBarIconWrapperIcon } from './home.styles'
 import Settings from './settings'
+import ShareLocation from './share-location'
 
 const Tab = createBottomTabNavigator() as any
 
@@ -41,13 +42,13 @@ function MyTabs () {
       />
       <Tab.Screen
         name="Share"
-        component={Settings}
+        component={ShareLocation}
         options={{
           tabBarIcon: ({ focused } : any) => (
             <FloatTabBarIconWrapper>
               <FloatTabBarIcon
-              source={require('../../assets/location.png')}
-            />
+                source={require('../../assets/location.png')}
+              />
             </FloatTabBarIconWrapper>
           )
         }}
