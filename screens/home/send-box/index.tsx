@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import InputSearch from './search-input'
+import { useNavigation, NavigationProp } from '@react-navigation/native'
 
 import { FlatList } from 'react-native'
 
@@ -14,8 +15,13 @@ import {
 
 import { sendBoxFakeData } from './send-box.fake-data'
 import Applicant from '../../../components/applicant'
+import { RootStackParam } from '../../root-stack.type'
+
+type NavitaionStak = NavigationProp<RootStackParam, 'Home'>
 
 const SendBox: FC = () => {
+  const navigation: NavitaionStak = useNavigation()
+
   return (
     <Container>
       <CustomHeader>
@@ -34,7 +40,7 @@ const SendBox: FC = () => {
       <FlatList
         data={sendBoxFakeData}
         keyExtractor={({ id }) => id}
-        renderItem={(item) => <Applicant {...item.item}/>}
+        renderItem={(item) => <Applicant {...item.item} onPress={() => navigation.navigate('Chat', item.item)}/>}
       />
 
     </Container>

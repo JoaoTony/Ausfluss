@@ -5,6 +5,7 @@ import SendBox from './send-box'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { FloatTabBarIcon, FloatTabBarIconWrapper, TabBarIconWrapperIcon } from './home.styles'
+import Settings from './settings'
 
 const Tab = createBottomTabNavigator() as any
 
@@ -40,7 +41,7 @@ function MyTabs () {
       />
       <Tab.Screen
         name="Share"
-        component={SendBox}
+        component={Settings}
         options={{
           tabBarIcon: ({ focused } : any) => (
             <FloatTabBarIconWrapper>
@@ -53,7 +54,7 @@ function MyTabs () {
       />
       <Tab.Screen
         name="Settings"
-        component={SendBox}
+        component={Settings}
         options={{
           tabBarIcon: ({ focused } : any) => (
             <TabBarIconWrapperIcon
