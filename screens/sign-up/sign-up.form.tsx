@@ -3,7 +3,7 @@
 import { FC, useState } from 'react'
 import BackIcon from '../../assets/back-icon.png'
 import { useNavigation, NavigationProp } from '@react-navigation/native'
-import { RootStackParam } from '../root-stack.type'
+import { RootStackParam } from '../../types/root-stack.type'
 import { Dimensions } from 'react-native'
 
 import {

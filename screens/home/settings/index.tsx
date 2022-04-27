@@ -2,6 +2,8 @@ import React, { FC } from 'react'
 import Button from '../../../components/button'
 import { Dimensions } from 'react-native'
 
+import { useAuthContext } from '../../../context/auth.context'
+
 import {
   Container,
   Avatar,
@@ -13,31 +15,39 @@ import {
 
 const width = Dimensions.get('screen').width
 
-const Settings: FC = () => (
-  <Container>
-     <Avatar source={require('../../../assets/avatar.jpg')} />
-     <Title>Bartolomeu Kuma</Title>
+const Settings: FC = () => {
+  const { signOut } = useAuthContext()
 
-     <UserInformationWrapper>
-       <UserInformationTitle>Nome</UserInformationTitle>
-       <UserInformationText>Bartolomeu Kuma</UserInformationText>
+  const handleSignOu = async () => {
+    await signOut()
+  }
 
-       <UserInformationTitle>Telefone</UserInformationTitle>
-       <UserInformationText>999 999 999</UserInformationText>
+  return (
+    <Container>
+      <Avatar source={require('../../../assets/avatar.jpg')} />
+      <Title>Bartolomeu Kuma</Title>
 
-       <UserInformationTitle>N do BI</UserInformationTitle>
-       <UserInformationText>Lda21892938924KZ</UserInformationText>
+      <UserInformationWrapper>
+        <UserInformationTitle>Nome</UserInformationTitle>
+        <UserInformationText>Bartolomeu Kuma</UserInformationText>
 
-       <UserInformationTitle>Carta de Condução</UserInformationTitle>
-       <UserInformationText>45sdhk855344</UserInformationText>
-     </UserInformationWrapper>
+        <UserInformationTitle>Telefone</UserInformationTitle>
+        <UserInformationText>999 999 999</UserInformationText>
 
-     <Button
+        <UserInformationTitle>N do BI</UserInformationTitle>
+        <UserInformationText>Lda21892938924KZ</UserInformationText>
+
+        <UserInformationTitle>Carta de Condução</UserInformationTitle>
+        <UserInformationText>45sdhk855344</UserInformationText>
+      </UserInformationWrapper>
+
+      <Button
         width={(width - 32).toString()}
-        onPress={() => {}}
+        onPress={() => handleSignOu()}
         text="Terminar Sessaão"
       />
-  </Container>
-)
+    </Container>
+  )
+}
 
 export default Settings

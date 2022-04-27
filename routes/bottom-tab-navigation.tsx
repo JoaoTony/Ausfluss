@@ -1,16 +1,16 @@
 import React from 'react'
 
-import SendBox from './send-box'
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import { FloatTabBarIcon, FloatTabBarIconWrapper, TabBarIconWrapperIcon } from './home.styles'
-import Settings from './settings'
-import ShareLocation from './share-location'
+import { FloatTabBarIcon, FloatTabBarIconWrapper, TabBarIconWrapperIcon } from './styles'
+
+import SendBox from '../screens/home/send-box'
+import Settings from '../screens/home/settings'
+import ShareLocation from '../screens/home/share-location'
 
 const Tab = createBottomTabNavigator() as any
 
-function MyTabs () {
+function BottomTabNavigation () {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -34,7 +34,7 @@ function MyTabs () {
         options={{
           tabBarIcon: ({ focused } : any) => (
             <TabBarIconWrapperIcon
-              source={require('../../assets/chat.png')}
+              source={require('../assets/chat.png')}
               style={{ tintColor: focused ? '#4AD196' : '#fff' }}
             />
           )
@@ -47,7 +47,7 @@ function MyTabs () {
           tabBarIcon: ({ focused } : any) => (
             <FloatTabBarIconWrapper>
               <FloatTabBarIcon
-                source={require('../../assets/location.png')}
+                source={require('../assets/location.png')}
               />
             </FloatTabBarIconWrapper>
           )
@@ -59,7 +59,7 @@ function MyTabs () {
         options={{
           tabBarIcon: ({ focused } : any) => (
             <TabBarIconWrapperIcon
-              source={require('../../assets/settings.png')}
+              source={require('../assets/settings.png')}
               style={{ tintColor: focused ? '#4AD196' : '#fff' }}
             />
           )
@@ -69,4 +69,4 @@ function MyTabs () {
   )
 }
 
-export default MyTabs
+export default BottomTabNavigation

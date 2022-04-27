@@ -14,7 +14,7 @@ import {
   CreateAccoutButton,
   CreateAccoutButtonText
 } from './login.styles'
-import { RootStackParam } from '../root-stack.type'
+import { RootStackParam } from '../../types/root-stack.type'
 
 type NavitaionStak = NavigationProp<RootStackParam, 'Login'>
 

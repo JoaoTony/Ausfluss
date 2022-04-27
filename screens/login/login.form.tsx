@@ -1,7 +1,8 @@
-import { FC } from 'react'
-import { useNavigation, NavigationProp } from '@react-navigation/native'
-import { RootStackParam } from '../root-stack.type'
+import { FC, useState } from 'react'
+
 import { Dimensions } from 'react-native'
+
+import { useAuthContext } from '../../context/auth.context'
 
 import {
   Form,
@@ -9,19 +10,34 @@ import {
   Input
 } from './login.styles'
 
-type NavitaionStak = NavigationProp<RootStackParam, 'Login'>
-
 const LoginForm: FC = () => {
   const width = Dimensions.get('screen').width
-  const navigation: NavitaionStak = useNavigation()
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  const { signIn } = useAuthContext()
+
+  const handleSignIn = async () => {
+    await signIn(email, password)
+  }
+
   return (
     <Form>
-      <Input placeholder="Digite o email" width={(width - 32).toString()}/>
-      <Input placeholder="Digete a palavra-passe" width={(width - 32).toString()} secureTextEntry={true} />
+      <Input
+        placeholder="Digite o email"
+        width={(width - 32).toString()}
+        onChangeText={(e) => setEmail(e)}
+        />
+      <Input
+        placeholder="Digete a palavra-passe"
+        width={(width - 32).toString()}
+        secureTextEntry={true}
+        onChangeText={(e) => setPassword(e)}
+      />
 
       <Button
         width={(width - 32).toString()}
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => handleSignIn()}
         text="Entrar"
       />
     </Form>

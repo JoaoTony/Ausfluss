@@ -15,7 +15,7 @@ import {
 
 import { sendBoxFakeData } from './send-box.fake-data'
 import Applicant from '../../../components/applicant'
-import { RootStackParam } from '../../root-stack.type'
+import { RootStackParam } from '../../../types/root-stack.type'
 
 type NavitaionStak = NavigationProp<RootStackParam, 'Home'>
 

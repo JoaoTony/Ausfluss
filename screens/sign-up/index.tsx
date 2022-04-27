@@ -14,7 +14,7 @@ import {
   SingnInButtonText
 } from './sign-up.styles'
 import SignUpForm from './sign-up.form'
-import { RootStackParam } from '../root-stack.type'
+import { RootStackParam } from '../../types/root-stack.type'
 type NavitaionStak = NavigationProp<RootStackParam, 'Login'>
 
 const SignUp: FC = () => {
