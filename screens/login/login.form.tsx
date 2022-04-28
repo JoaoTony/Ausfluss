@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, useEffect } from 'react'
 
 import { Dimensions } from 'react-native'
 
@@ -14,12 +14,19 @@ const LoginForm: FC = () => {
   const width = Dimensions.get('screen').width
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [loading, setLoading] = useState(false)
 
   const { signIn } = useAuthContext()
 
   const handleSignIn = async () => {
+    setLoading(true)
     await signIn(email, password)
+    setLoading(false)
   }
+
+  useEffect(() => {
+    return setLoading(false)
+  }, [])
 
   return (
     <Form>
@@ -39,6 +46,7 @@ const LoginForm: FC = () => {
         width={(width - 32).toString()}
         onPress={() => handleSignIn()}
         text="Entrar"
+        loading={loading}
       />
     </Form>
   )
