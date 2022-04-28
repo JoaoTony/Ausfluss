@@ -22,7 +22,7 @@ const Chat: FC = () => {
   const route = useRoute()
   const navigation = useNavigation()
 
-  const { name } = route.params as ChatProps
+  const { name, id } = route.params as ChatProps
 
   return (
     <Container>

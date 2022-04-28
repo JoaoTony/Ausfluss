@@ -2,7 +2,8 @@ import React, { FC } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 
 import StackNavigation from './stack-navigation'
-import BottomTabNavigation from './bottom-tab-navigation'
+
+import CompositeNavigation from './composite-navigation'
 
 import { useAuthContext } from '../context/auth.context'
 import Loader from '../screens/loading'
@@ -16,7 +17,7 @@ const Router: FC = () => {
 
   return (
     <NavigationContainer>
-      {auth?.token ? <BottomTabNavigation /> : <StackNavigation/>}
+      {auth?.token ? <CompositeNavigation /> : <StackNavigation/>}
     </NavigationContainer>
   )
 }

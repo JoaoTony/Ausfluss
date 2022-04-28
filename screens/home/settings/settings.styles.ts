@@ -40,3 +40,12 @@ export const UserInformationText = styled.Text`
   color: #3D3D3D;
   margin-bottom: 10px;
 `
+export const ShowVehiclesButton = styled.TouchableOpacity``
+
+export const ShowVehiclesButtonText = styled.Text`
+  font-size: 16px;
+  font-family: Poppins_400Regular;
+  color: #4AD196;
+  margin-bottom: 10px;
+
+  `

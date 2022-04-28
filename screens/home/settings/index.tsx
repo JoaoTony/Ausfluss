@@ -1,7 +1,8 @@
-import React, { FC } from 'react'
+/* eslint-disable no-undef */
+import React, { FC, useEffect, useState } from 'react'
 import Button from '../../../components/button'
 import { Dimensions } from 'react-native'
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useAuthContext } from '../../../context/auth.context'
 
 import {
@@ -10,36 +11,60 @@ import {
   Title,
   UserInformationWrapper,
   UserInformationTitle,
-  UserInformationText
+  UserInformationText,
+  ShowVehiclesButton,
+  ShowVehiclesButtonText
 } from './settings.styles'
+import { getFetcher } from '../../../services/fetcher'
+import { DriverInfo } from './settings.types'
+import { useNavigation } from '@react-navigation/native'
 
 const width = Dimensions.get('screen').width
 
 const Settings: FC = () => {
   const { signOut } = useAuthContext()
+  const [user, setUser] = useState<DriverInfo>()
+  const navigation = useNavigation() as any
 
   const handleSignOu = async () => {
     await signOut()
   }
 
+  const getDriverInfo = async () => {
+    const authValue = await AsyncStorage.getItem('AusflussAuth')
+    const { data } = await getFetcher<DriverInfo>(`/api/v1/drivers/${JSON.parse(authValue || '').id}`)
+
+    if (data) {
+      setUser(data)
+    }
+  }
+
+  useEffect(() => {
+    getDriverInfo()
+  }, [])
+
   return (
     <Container>
       <Avatar source={require('../../../assets/avatar.jpg')} />
-      <Title>Bartolomeu Kuma</Title>
+      <Title>{user?.name || 'carregando...'}</Title>
 
       <UserInformationWrapper>
         <UserInformationTitle>Nome</UserInformationTitle>
-        <UserInformationText>Bartolomeu Kuma</UserInformationText>
+        <UserInformationText>{user?.name}</UserInformationText>
 
-        <UserInformationTitle>Telefone</UserInformationTitle>
-        <UserInformationText>999 999 999</UserInformationText>
+        <UserInformationTitle>Email</UserInformationTitle>
+        <UserInformationText>{user?.email}</UserInformationText>
 
         <UserInformationTitle>N do BI</UserInformationTitle>
-        <UserInformationText>Lda21892938924KZ</UserInformationText>
+        <UserInformationText>{user?.num_BI}</UserInformationText>
 
         <UserInformationTitle>Carta de Condução</UserInformationTitle>
-        <UserInformationText>45sdhk855344</UserInformationText>
+        <UserInformationText>{user?.driver_id}</UserInformationText>
       </UserInformationWrapper>
+
+      <ShowVehiclesButton onPress={() => navigation.navigate('Vehicles')}>
+        <ShowVehiclesButtonText>Ver lista de Veículos</ShowVehiclesButtonText>
+      </ShowVehiclesButton>
 
       <Button
         width={(width - 32).toString()}

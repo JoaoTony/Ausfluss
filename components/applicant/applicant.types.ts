@@ -2,7 +2,7 @@ import { TouchableOpacityProps } from 'react-native'
 
 export interface ApplicantsProps extends TouchableOpacityProps {
   name: string;
-  avatar: any;
+  photo_url: any;
   message: string;
-  time: string;
+  id: number | string;
 }

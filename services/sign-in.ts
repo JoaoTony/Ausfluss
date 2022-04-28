@@ -3,7 +3,7 @@ import { Alert } from 'react-native'
 import { Auth } from '../types/auth.type'
 
 export const signInService = async (email: string, password: string): Promise<Auth> => {
-  const data = { token: '', email: '', name: '' }
+  const data = { token: '', id: '' }
 
   try {
     const response = await fetch('http://192.168.0.105:8080/api/v1/auth/login', {
@@ -19,6 +19,8 @@ export const signInService = async (email: string, password: string): Promise<Au
       console.log('201: ', response)
       const res = await response.json()
       data.token = res.access_token
+      data.id = res.id
+      console.log('este e o id: ', res.id)
     } else {
       console.log('N 201: ', response)
       Alert.alert('Erro', 'Erro abaixo de 500')

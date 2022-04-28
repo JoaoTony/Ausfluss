@@ -4,8 +4,8 @@ export type RootStackParam = {
   Home: undefined;
   Chat: {
     name: string;
-    avatar: any;
+    photo_url: any;
     message: string;
-    time: string;
+    id: number | string;
   };
 };

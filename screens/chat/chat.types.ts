@@ -1,6 +1,6 @@
 export interface ChatProps {
   name: string;
-  avatar: any;
+  photo_url: string;
   message: string;
-  time: string;
+  id: number | string;
 }

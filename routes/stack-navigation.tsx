@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Login from '../screens/login'
 import SignUp from '../screens/sign-up'
-import Chat from '../screens/chat'
 
 const Stack = createNativeStackNavigator() as any
 
@@ -17,11 +16,6 @@ const StackNavigation: FC = () => (
     <Stack.Screen
       name="SignUp"
       component={SignUp}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Chat"
-      component={Chat}
       options={{ headerShown: false }}
     />
   </Stack.Navigator>
