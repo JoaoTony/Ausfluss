@@ -12,6 +12,14 @@ export const Container = styled.View`
 
 `
 
+export const LoadingView = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background:  #F1F2F4;
+  padding-bottom: 100px;
+`
+
 export const CustomHeader = styled.View`
   width: 100%;
   height: 100px;

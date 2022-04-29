@@ -4,7 +4,7 @@ import { Container, Text } from './message.styles'
 import { MessageProps } from './message.types'
 
 const Message: FC<MessageProps> = ({ owner, message }) => (
-  <Container amITheOwner={owner === '111'}>
+  <Container amITheOwner={owner === 'driver'}>
     <Text>{message}</Text>
   </Container>
 )

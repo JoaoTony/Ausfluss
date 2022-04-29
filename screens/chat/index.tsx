@@ -1,5 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
+
+import useSWR from 'swr'
 
 import { FlatList } from 'react-native'
 
@@ -14,15 +16,31 @@ import {
   ButtonSendMessage,
   ButtonSendMessageIcon
 } from './chat.styles'
-import { ChatProps } from './chat.types'
-import { fakeDataChat } from './chat-fake-data'
+import { ChatProps, MessageProps } from './chat.types'
 import Message from './nessage'
+import { postFetcher } from '../../services/fetcher'
 
 const Chat: FC = () => {
   const route = useRoute()
   const navigation = useNavigation()
+  const [newMessage, setNewMessage] = useState('')
 
   const { name, id } = route.params as ChatProps
+
+  const handleSendMessage = async () => {
+    if (newMessage) {
+      postFetcher('/api/v1/messages', {
+        to: id,
+        content: newMessage
+      })
+    }
+
+    setNewMessage('')
+  }
+
+  const { data } = useSWR<MessageProps[]>(`http://192.168.0.105:8080/api/v1/messages/?to=${id}`)
+
+  console.log('Tem mensagem: ', data)
 
   return (
     <Container>
@@ -34,21 +52,24 @@ const Chat: FC = () => {
         <Title>{name}</Title>
       </CustomHeader>
 
-      <FlatList
-        data={fakeDataChat}
-        keyExtractor={(item) => item.id}
+      {data && (
+        <FlatList
+        data={[...data].reverse()}
+        keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
+        inverted
         contentContainerStyle={{
-          marginTop: 10,
-          paddingBottom: 100
+          marginTop: 100,
+          paddingBottom: 10
         }}
-        renderItem={(item) => <Message {...item.item} />}
+        renderItem={(item) => <Message owner={item.item.from_type} message={item.item.content} />}
       />
+      )}
 
       <Footer>
-        <Input placeholder="digite uma mensagem"/>
+        <Input placeholder="digite uma mensagem" value={newMessage} onChangeText={value => setNewMessage(value)} />
 
-        <ButtonSendMessage>
+        <ButtonSendMessage onPress={() => handleSendMessage()}>
           <ButtonSendMessageIcon source={require('../../assets/icon-send.png')} />
         </ButtonSendMessage>
       </Footer>

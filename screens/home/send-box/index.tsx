@@ -2,8 +2,10 @@
 import React, { FC, useState, useEffect } from 'react'
 import InputSearch from './search-input'
 import { useNavigation, NavigationProp } from '@react-navigation/native'
-import { FlatList } from 'react-native'
+import { ActivityIndicator, FlatList } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
+import useSWR from 'swr'
 
 import {
   Container,
@@ -11,7 +13,8 @@ import {
   TitleLight,
   CustomHeader,
   HaderRow,
-  Avatar
+  Avatar,
+  LoadingView
 } from './send-box.styles'
 
 import { sendBoxFakeData } from './send-box.fake-data'
@@ -25,9 +28,8 @@ type NavitaionStak = NavigationProp<RootStackParam, 'Home'>
 
 const SendBox: FC = () => {
   const navigation: NavitaionStak = useNavigation()
-  const [data, setData] = useState<ApplicantProps[]>()
+  // const [data, setData] = useState<ApplicantProps[]>()
   const [user, setUser] = useState<DriverInfo>()
-  const [isLoading, setIsLoading] = useState(false)
 
   const getDriverInfo = async () => {
     const authValue = await AsyncStorage.getItem('AusflussAuth')
@@ -35,25 +37,13 @@ const SendBox: FC = () => {
 
     if (data) {
       setUser(data)
-      console.log('olaaa', data)
     }
   }
 
-  const getMails = async () => {
-    setIsLoading(true)
-    const { data, loading } = await getFetcher<ApplicantProps[]>('/api/v1/messages/mailbox')
-
-    if (data) {
-      setData(data)
-    }
-
-    setIsLoading(loading)
-    console.log('ola: ', data)
-  }
+  const { data, error } = useSWR('http://192.168.0.105:8080/api/v1/messages/mailbox')
 
   useEffect(() => {
     getDriverInfo()
-    getMails()
   }, [])
 
   return (
@@ -72,12 +62,17 @@ const SendBox: FC = () => {
       <InputSearch placeholder="Pesquisar por solicitações" />
 
       {data && (
-
         <FlatList
-        data={data}
-        keyExtractor={({ id }) => id.toString()}
-        renderItem={(item) => <Applicant {...item.item} onPress={() => navigation.navigate('Chat', item.item)}/>}
+          data={data}
+          keyExtractor={({ id }) => id.toString()}
+          renderItem={(item) => <Applicant {...item.item} onPress={() => navigation.navigate('Chat', item.item)}/>}
         />
+      )}
+
+      {!data && !error && (
+        <LoadingView>
+          <ActivityIndicator size={60} color="#4AD196"/>
+        </LoadingView>
       )}
 
     </Container>
