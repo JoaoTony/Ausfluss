@@ -43,7 +43,8 @@ const App = () => {
       shouldRetryOnError: true,
       refreshInterval: 1000,
       refreshWhenOffline: true,
-      errorRetryInterval: 1000
+      errorRetryInterval: 1000,
+      errorRetryCount: 5
     }}
     >
       <Suspense fallback>
