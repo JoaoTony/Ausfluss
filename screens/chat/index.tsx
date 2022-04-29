@@ -38,9 +38,7 @@ const Chat: FC = () => {
     setNewMessage('')
   }
 
-  const { data } = useSWR<MessageProps[]>(`http://192.168.0.105:8080/api/v1/messages/?to=${id}`)
-
-  console.log('Tem mensagem: ', data)
+  const { data } = useSWR<MessageProps[]>(`/api/v1/messages/?to=${id}`)
 
   return (
     <Container>

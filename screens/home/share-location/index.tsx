@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { FC, useState, useEffect } from 'react'
 
 import * as Location from 'expo-location'
@@ -33,8 +34,6 @@ const ShareLocation: FC = () => {
       city: address?.city
     })
 
-    console.log('Tendado mandar localizasao: ', data, status)
-
     setShowuttons(prev => !prev)
   }
 
@@ -48,13 +47,11 @@ const ShareLocation: FC = () => {
 
       const location = await Location.getCurrentPositionAsync({}) as Coordinates
       const address = await Location.reverseGeocodeAsync(location.coords) as Address[]
-      console.log(address[0])
+
       setAddress(address[0])
       setLocation(location)
     })()
   }, [])
-
-  console.log(location)
 
   let text = 'Waiting..'
   if (errorMsg) {

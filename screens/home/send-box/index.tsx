@@ -40,7 +40,7 @@ const SendBox: FC = () => {
     }
   }
 
-  const { data, error } = useSWR('http://192.168.0.105:8080/api/v1/messages/mailbox')
+  const { data, error } = useSWR('/api/v1/messages/mailbox')
 
   useEffect(() => {
     getDriverInfo()

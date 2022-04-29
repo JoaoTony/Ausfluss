@@ -48,17 +48,13 @@ const SignUpForm: FC = () => {
           }
         })
 
-        const res = await response.json()
-
         if (response.status === 201) {
-          console.log('201: ', response)
           navigation.navigate('Login')
         } else {
-          console.log('N 201: ', res)
+          Alert.alert('Erro', 'Erro ao tentar criar conta')
         }
       } catch (error) {
-        console.log('Erro: ', error)
-        Alert.alert('Erro', 'Erro no catch')
+        Alert.alert('Erro', 'Erro no servidor')
       }
     } else {
       Alert.alert('Palavra passe', 'A palavras-pases diferentes')

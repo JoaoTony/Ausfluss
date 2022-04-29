@@ -1,12 +1,13 @@
 /* eslint-disable no-undef */
 import AsyncStorage from '@react-native-async-storage/async-storage'
-const baseURL = 'http://192.168.0.105:8080'
+// const baseURL = 'http://192.168.0.105:8080'
 
 const fetcher = (method: string) => async <T>(url: string, bodyR?: object) => {
   let loading = true
   const authValue = await AsyncStorage.getItem('AusflussAuth')
+  const backEndIP = await AsyncStorage.getItem('backEndIP')
 
-  const response = await fetch(`${baseURL}${url}`, {
+  const response = await fetch(`http://${backEndIP}:8080${url}`, {
     method,
     body: JSON.stringify(bodyR),
     headers: {

@@ -28,10 +28,16 @@ const App = () => {
     return tooken
   }
 
+  const getBackEndIP = async () => {
+    const backEndIP = await AsyncStorage.getItem('backEndIP')
+
+    return backEndIP
+  }
+
   return (
     <SWRConfig
     value={{
-      fetcher: async (url: string) => fetch(url, {
+      fetcher: async (url: string) => fetch(`http://${await getBackEndIP()}:8080${url}`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',

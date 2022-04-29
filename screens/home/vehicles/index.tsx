@@ -61,19 +61,17 @@ const Vehicles: FC = () => {
     setLoading(true)
     const { data, status } = await postFetcher('/api/v1/vehicles', values)
 
-    console.log('Porraaaaa', data, status)
     setLoading(false)
 
     if (status === 201) {
       Alert.alert('', 'Veiculo criado com sucesso')
+      setShowAdd(false)
     } else {
       Alert.alert('', 'Alguma coisa deu errodo, tente novamente mais tarde')
     }
   }
 
-  const { data, error } = useSwr<VehicleProps[]>(`http://192.168.0.105:8080/api/v1/vehicles?owner=${owner}`)
-
-  console.log('Estou testandooooo', data)
+  const { data, error } = useSwr<VehicleProps[]>(`/api/v1/vehicles?owner=${owner}`)
 
   useEffect(() => {
     (
